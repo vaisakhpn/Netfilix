@@ -5,18 +5,18 @@
     height: 60px;
     display: flex;
     justify-content: space-between;
-    background-color: #00000089;
+    background: none;
     
 }
 .logo{
     position: fixed;
-    width: 120px;
-    left: 20px;
-    margin-top: 1px;
+    width: 150px;
+    left: 200px;
+    margin-top: 15px;
 }
 .avatar{
     position: fixed;
     width: 30px;
     right:20px;
-    margin-top: 1px;
+    margin-top: 10px;
 }
