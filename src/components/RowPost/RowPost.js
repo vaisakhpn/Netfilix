@@ -17,7 +17,7 @@ const RowPost = (props) => {
     height: '390',
     width: '100%',
     playerVars: {
-      
+      controls:0,
       autoplay: 1,
     },
   };
