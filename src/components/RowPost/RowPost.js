@@ -7,12 +7,20 @@ import axios from '../../axios'
 const RowPost = (props) => {
   const[movie,setMovie]=useState([])
   const[urlid,setUrlId]=useState('')
+  const [showVideo,setShowVideo]=useState(false)
   useEffect(() => {
   axios.get(props.url).then((response)=>{
     console.log(response.data)
     setMovie(response.data.results)
+    setShowVideo(true)
   })
-  }, [])
+  }, []);
+  useEffect(()=>{
+    document.body.addEventListener('click',handleDoumentClick)
+    return()=>{
+      document.body.removeEventListener('click',handleDoumentClick)
+    }
+  })
   const opts = {
     height: '390',
     width: '100%',
@@ -26,9 +34,18 @@ const RowPost = (props) => {
     axios.get(`/movie/${id}/videos?api_key=${API_KEY}&language=en-US`).then(response=>{
       if(response.data.results.length!==0){
       setUrlId(response.data.results[0])
+      setShowVideo(true);
       }
     })
   }
+  const handleDoumentClick=()=>{
+    setUrlId('')
+    setShowVideo(false);
+  };
+  const handleVideoClick = (event) => {
+  
+    event.stopPropagation();
+  };
   return (
     <div className='row'>
         <h2>{props.title}</h2>
@@ -37,7 +54,8 @@ const RowPost = (props) => {
           <img onClick={()=>handleMovie(obj.id)} className={props.isSmall?'smallPoster':'poster'} src={`${imageUrl+obj.backdrop_path}`} alt='poster'/>
            )}  
         </div>
-       {urlid && <Youtube opts={opts} videoId={urlid.key} />}
+       {showVideo && urlid &&(
+        <div onClick={handleVideoClick}> <Youtube opts={opts} videoId={urlid.key} /></div>)}
     </div>
   )
 }
