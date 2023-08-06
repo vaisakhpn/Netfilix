@@ -1,15 +1,19 @@
-import React from 'react'
-import './Navbar.css'
+import React from 'react';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import './Navbar.css';
 
 const NavBar = () => {
-  return ( 
-    <div >
-        <div className='navbar'>
-        <img className='logo' src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1920px-Netflix_2015_logo.svg.png" alt=" logo" />
-        <img className='avatar' src="https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png" alt="avatar" />
-        </div>
-    </div>
-  )
+  return (
+    <Navbar expand="lg" className="bg-transparent">
+      <Container>
+        
+        <Navbar.Brand>
+          <img className='logo' src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1920px-Netflix_2015_logo.svg.png" alt="Logo" />
+        </Navbar.Brand>       
+        <Navbar.Toggle aria-controls="navbar-nav" className="toggler" />      
+      </Container>
+    </Navbar>
+  );
 }
 
-export default NavBar
+export default NavBar;

@@ -1,6 +1,7 @@
 import './App.css';
 import {originals,action,romance,horror,comedy} from './url'
 import NavBar from './components/NavBar/NavBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Banner from './components/Banner/Banner';
 import RowPost from './components/RowPost/RowPost';
 

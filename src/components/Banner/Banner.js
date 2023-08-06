@@ -1,10 +1,13 @@
 import React, { useState,useEffect } from 'react'
 import Youtube from 'react-youtube'
+import { Container,Row,Col } from 'react-bootstrap'
 import {API_KEY,imageUrl} from '../../constants/constants'
 import axios from '../../axios'
 import './Banner.css'
 
+
 const Banner = () => {
+
   const [movie, setMovie] = useState([])
   const [urlid,setUrlid]=useState('')
   const [showVideo, setShowVideo] = useState(false);
@@ -56,23 +59,28 @@ const Banner = () => {
 
   
   return (
-    <div style={{backgroundImage:`url(${movie?imageUrl+movie.backdrop_path:""})`}} className='banner'>
-     
+    <Container fluid>
+      <Row>
+        <Col>
+    <div style={{backgroundImage:`url(${movie?imageUrl+movie.backdrop_path:""})`}}  className='banner'>    
         <div className='content'>
             <h1 className='title'>{movie?movie.title:""}</h1>
             <div className='banner-buttons'>
                 <button className='button' onClick={()=>handleMovie(movie.id)} >play</button>
                 <button className='button'>My list</button>
             </div>
+             
             {showVideo && urlid && (
-            <div onClick={handleVideoClick}>
+            <div onClick={handleVideoClick} className='youtube-container'>
                <Youtube opts={opts} videoId={urlid.key} />
             </div>)}
-            {!showVideo&&(
-            <h1 className='discription'>{movie?movie.overview:""}</h1>)}
+           
         </div>
         <div className='fade-bottom'></div>
     </div>
+    </Col>
+    </Row>
+    </Container>
   )
 }
 

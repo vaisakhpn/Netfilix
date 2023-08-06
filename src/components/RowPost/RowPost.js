@@ -1,5 +1,6 @@
 import { useEffect,useState } from 'react'
 import Youtube from  'react-youtube'
+import { Container,Row,Col } from 'react-bootstrap'
 import { API_KEY, imageUrl} from '../../constants/constants'
 import './RowPost.css'
 import axios from '../../axios'
@@ -47,6 +48,8 @@ const RowPost = (props) => {
     event.stopPropagation();
   };
   return (
+    <Container fluid>
+      <Row>
     <div className='row'>
         <h2>{props.title}</h2>
         <div className='posters'>
@@ -57,6 +60,8 @@ const RowPost = (props) => {
        {showVideo && urlid &&(
         <div onClick={handleVideoClick}> <Youtube opts={opts} videoId={urlid.key} /></div>)}
     </div>
+    </Row>
+    </Container>
   )
 }
 
