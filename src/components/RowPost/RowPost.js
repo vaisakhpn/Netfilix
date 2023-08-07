@@ -1,6 +1,6 @@
 import { useEffect,useState } from 'react'
 import Youtube from  'react-youtube'
-import { Container,Row,Col } from 'react-bootstrap'
+import { Container,Row } from 'react-bootstrap'
 import { API_KEY, imageUrl} from '../../constants/constants'
 import './RowPost.css'
 import axios from '../../axios'

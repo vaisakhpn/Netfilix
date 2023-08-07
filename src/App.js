@@ -1,21 +1,20 @@
 import './App.css';
-import {originals,action,romance,horror,comedy} from './url'
-import NavBar from './components/NavBar/NavBar';
+
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Banner from './components/Banner/Banner';
-import RowPost from './components/RowPost/RowPost';
+import Home from './Pages/Home';
+import SignIn from './Pages/SignIn';
 
 
 function App() {
   return(
   <div className='App'>
-  <NavBar/>
-  <Banner/>
-  <RowPost url={originals} title='Netflix Originals'/>
-  <RowPost url={action} title='Action' isSmall/>
-  <RowPost url={romance} title='Romance' isSmall/>
-  <RowPost url={horror} title='Horror' isSmall/>
-  <RowPost url={comedy} title='Comedy' isSmall/>
+    <Router>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/signin' element={<SignIn/>}/>
+      </Routes>
+    </Router>
   </div>
   )
   
