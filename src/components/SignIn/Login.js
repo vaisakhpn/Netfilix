@@ -4,7 +4,7 @@ import axios from '../../axios'
 import Style from './Login.module.css'
 import { Container,Row,Col,Card, Button } from 'react-bootstrap'
 import {API_KEY,imageUrl} from '../../constants/constants'
-import { Link } from '@mui/material'
+import { Link } from 'react-router-dom'
 const Login = () => {
   const [movie, setMovie] = useState([]);
   const [email,setEmail]=useState();
@@ -55,7 +55,7 @@ const Login = () => {
             <br />
             <Button variant='danger' className={Style.uploadBtn}>Sign In</Button>
         </div>
-      <Link className={Style.link}>Sign up</Link>
+      <Link to='/signup' className={Style.link}>Sign up</Link>
       </Card>
       </div>
     </Col>

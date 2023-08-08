@@ -12,13 +12,13 @@
     
  
 }
-
-.avatar{
-    position: fixed;
-    width: 30px;
-    right:20px;
-    margin-top: 10px;
+.link{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
 }
+
 @media(max-width: 576px) {
 
     .logo{

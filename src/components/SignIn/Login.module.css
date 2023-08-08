@@ -57,8 +57,13 @@
   .link{
     padding-top:20px;
     cursor: pointer;
-    color: inherit;
-    text-decoration: inherit;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+   align-items: center;
+  }
+  .link:hover{
+    color: rgb(117, 103, 87);
   }
 @media (max-width: 576px) {
     .banner {

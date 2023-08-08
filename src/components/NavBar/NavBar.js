@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import './Navbar.css';
 
@@ -13,9 +14,9 @@ const NavBar = () => {
       <Container>
         
         <Navbar.Brand>
-          <img className='logo' src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1920px-Netflix_2015_logo.svg.png" alt="Logo" />
+          <Link to='/'><img className='logo' src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1920px-Netflix_2015_logo.svg.png" alt="Logo" /></Link>
         </Navbar.Brand> 
-        <Nav.Link href="/signin" className="d-none d-lg-block"><Button variant='danger'>Sign In</Button></Nav.Link>      
+        <Nav.Link  className="d-none d-lg-block"><Button variant='danger'><Link className='link' to='/signin'>Sign in</Link></Button></Nav.Link>      
         <Navbar.Toggle aria-controls="navbar-nav" className="toggler" onClick={handleToggle} /> 
       </Container>
     </Navbar>
