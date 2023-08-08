@@ -4,9 +4,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './Pages/Home';
 import SignIn from './Pages/SignIn';
 import Createpage from './Pages/Create';
+import { useContext, useEffect } from 'react';
+import { AuthContext, FirebaseContext } from './Store/FirbaseContext';
 
 
 function App() {
+  const {setUser}=useContext(AuthContext)
+  const {firebase}=useContext(FirebaseContext)
+  useEffect(()=>{
+    firebase.auth().onAuthStateChanged((user)=>{
+      setUser(user)
+    })
+  })
   return(
   <div className='App'>
     <Router>

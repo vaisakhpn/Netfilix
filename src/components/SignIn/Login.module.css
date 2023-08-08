@@ -55,21 +55,32 @@
     left: 10px;
   }
   .link{
-    padding-top:20px;
+    display: inline-block;
+    margin-top:20px;
     cursor: pointer;
     text-decoration: none;
     color: white;
     font-size: 18px;
-   align-items: center;
+    text-align: center;
+    
   }
   .link:hover{
     color: rgb(117, 103, 87);
   }
+  .errormessage{
+    color: red;
+    position: absolute;
+    margin-top: 10px;
+  }
 @media (max-width: 576px) {
+  body {
+    background-color: black; 
+  }
     .banner {
-      height: 600px;
+      display: none;
     }  
-    .fadebottom {
-      height: 600px; 
+    .card{
+      height: 570px;
+      width: 100%;
     }
   }

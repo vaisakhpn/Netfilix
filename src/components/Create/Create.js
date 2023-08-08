@@ -1,10 +1,13 @@
-import React, { Fragment, useEffect,useState } from 'react'
+import React, { Fragment, useContext, useEffect,useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from '../../axios'
 import Style from './Create.module.css'
 import { Container,Row,Col,Card, Button } from 'react-bootstrap'
 import {API_KEY,imageUrl} from '../../constants/constants'
 import { Link } from 'react-router-dom'
+import {FirebaseContext} from '../../Store/FirbaseContext'
 const Create = () => {
+  const navigate=useNavigate()
   const [movie, setMovie] = useState([]);
   const [name, setName] = useState("");
 const [nameError, setNameError] = useState("");
@@ -14,6 +17,7 @@ const [phone, setPhone] = useState("");
 const [phoneError, setPhoneError] = useState("");
 const [password, setPassword] = useState("");
 const [passwordError, setPasswordError] = useState("");
+const {firebase}=useContext(FirebaseContext)
   
   useEffect(() => {
     axios.get(`trending/all/week?api_key=${API_KEY}&language=en-US`).then((response)=>{
@@ -52,7 +56,7 @@ const [passwordError, setPasswordError] = useState("");
       setPhoneError("");
     }
     if (!password.trim()) {
-      setPasswordError("password is required");
+      setPasswordError("Password is required");
       isValid = false;
     } else {
       setPasswordError("");
@@ -64,8 +68,18 @@ const [passwordError, setPasswordError] = useState("");
   const handleCreate=(e)=>{
     e.preventDefault();
     if (validateForm()) {
-      // Form is valid, perform form submission or other actions here
-      console.log("Form submitted successfully");
+      firebase.auth().createUserWithEmailAndPassword(email, password).then((result)=>{
+        result.user.updateProfile({displayName:name}).then(()=>{
+        firebase.firestore().collection('users').add({
+          id:result.user.uid,
+          username:name,
+          phone:phone     
+        }).then(()=>{
+        navigate('/signin')
+        });
+      });
+      
+    });
     } else {
       // Form is invalid, display error messages
       console.log("Form contains errors");
@@ -90,6 +104,7 @@ const [passwordError, setPasswordError] = useState("");
               className={Style.input}
               type="text"
               id="name"
+              autocomplete="off"
               value={name}
               placeholder='Enter Name'
               name="name"
@@ -103,6 +118,7 @@ const [passwordError, setPasswordError] = useState("");
               className={Style.input}
               type="email"
               id="email"
+              autocomplete="off"
               value={email}
               placeholder='Email'
               name="email"
@@ -116,6 +132,7 @@ const [passwordError, setPasswordError] = useState("");
               type="tel"
               placeholder='Phone number'
               id="phone"
+              autocomplete="off"
               name="phone"
               value={phone}
               onChange={(e)=>setPhone(e.target.value)}
@@ -127,6 +144,7 @@ const [passwordError, setPasswordError] = useState("");
               type="password"
               placeholder='Password'
               id="password"
+              autocomplete="off"
               name="password"
               value={password}
               onChange={(e)=>setPassword(e.target.value)}

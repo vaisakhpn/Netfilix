@@ -56,7 +56,7 @@
     left: 10px;
   }
   .link{
-    padding-top:20px;
+    margin-top:20px;
     cursor: pointer;
     color: white;
     text-decoration: none;
@@ -67,14 +67,17 @@
   .link:hover{
     color: rgb(117, 103, 87);
   }
-  .errormessege{
-    color: white;
+  .errormessage{
+    color: red;
+    position: absolute;
+    margin-top: 10px;
   }
 @media (max-width: 576px) {
     .banner {
-      height: 600px;
+      display: none;
     }  
-    .fadebottom {
-      height: 600px; 
+    .card{
+      height: 570px;
+      width: 100%;
     }
   }

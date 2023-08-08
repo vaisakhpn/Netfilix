@@ -18,6 +18,24 @@
     color: white;
     font-size: 15px;
 }
+.flink{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    
+    
+}
+.fbtn{
+    position: relative;
+    margin-left: 900px;
+}
+.fbtn2{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
 
 @media(max-width: 576px) {
 
