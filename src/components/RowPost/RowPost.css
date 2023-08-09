@@ -43,6 +43,9 @@
     padding: 5px;
     z-index: 1;
   }
+  .favorite:hover{
+    transform: scale(1.5);
+  }
   .poster-container:hover .favorite {
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
