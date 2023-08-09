@@ -42,4 +42,14 @@ body{
     display: inline-block; 
     margin: 5px; 
   }
-  
+  .delete {
+    position: absolute;
+    cursor: pointer;
+    top: 25px;
+    left: 25px;
+    padding: 5px;
+    z-index: 1;
+  }
+  .delete:hover{
+    transform: scale(1.5);
+  }
