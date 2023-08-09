@@ -75,7 +75,7 @@ const {firebase}=useContext(FirebaseContext)
           username:name,
           phone:phone     
         }).then(()=>{
-        navigate('/signin')
+        navigate('/')
         });
       });
       

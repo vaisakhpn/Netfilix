@@ -6,6 +6,7 @@ import SignIn from './Pages/SignIn';
 import Createpage from './Pages/Create';
 import { useContext, useEffect } from 'react';
 import { AuthContext, FirebaseContext } from './Store/FirbaseContext';
+import FavouriteList from './Pages/FavouriteList';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/signin' element={<SignIn/>}/>
         <Route path='/signup' element={<Createpage/>}/>
+        <Route path='/favourite' element={<FavouriteList/>}/>
       </Routes>
     </Router>
   </div>

@@ -1,11 +1,17 @@
-import { useEffect,useState } from 'react'
+import { useEffect,useState,useContext } from 'react'
 import Youtube from  'react-youtube'
 import { Container,Row } from 'react-bootstrap'
 import { API_KEY, imageUrl} from '../../constants/constants'
 import './RowPost.css'
 import axios from '../../axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faHeart} from '@fortawesome/free-solid-svg-icons'
+import { FirebaseContext } from '../../Store/FirbaseContext'
+import { AuthContext } from '../../Store/FirbaseContext'
 
 const RowPost = (props) => {
+  const {firebase}=useContext(FirebaseContext)
+  const {user}=useContext(AuthContext)
   const[movie,setMovie]=useState([])
   const[urlid,setUrlId]=useState('')
   const [showVideo,setShowVideo]=useState(false)
@@ -47,14 +53,44 @@ const RowPost = (props) => {
   
     event.stopPropagation();
   };
+
+  const favouriteHandler=(id)=>{
+    
+    console.log(id)
+    const selectedMovie = movie.find((obj) => obj.id === id);
+
+    if (selectedMovie && user) {
+      const firestore = firebase.firestore();
+      firestore.collection('posterdata').add({
+        id: selectedMovie.id,
+        title: selectedMovie.title, 
+        posterPath: selectedMovie.poster_path,
+        backdropPath:selectedMovie.backdrop_path,
+        userId: user.uid,
+        createdAt: new Date().toDateString(),
+      }).then(() => {
+        console.log('Poster data added to Firestore.');
+      }).catch((error) => {
+        console.error('Error adding poster data:', error);
+      })
+    }
+
+  }
   return (
     <Container fluid>
       <Row>
     <div className='row'>
         <h2>{props.title}</h2>
         <div className='posters'>
+       
           {movie.map((obj)=>
+          <div className='poster-container'>
+          <div className="favorite">
+          {user &&<FontAwesomeIcon onClick={()=>favouriteHandler(obj.id)} className='fa-lg fa-regular' icon={faHeart} /> }    
+          </div>
           <img onClick={()=>handleMovie(obj.id)} className={props.isSmall?'smallPoster':'poster'} src={`${imageUrl+obj.backdrop_path}`} alt='poster'/>
+          
+          </div>
            )}  
         </div>
        {showVideo && urlid &&(

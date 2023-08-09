@@ -1,13 +1,21 @@
+body{
+    background-color: black;
+}
+.container{
+    height: 800px;
+}
+.h2{
+    position: relative;
+    margin-top: 50px;
+}
 .row{
-    
     color: white;
     
 }
 .posters{
     display: flex;
     padding: 20px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    flex-direction: column;
 
 }
 .posters::-webkit-scrollbar{
@@ -15,7 +23,7 @@
 }
 .poster{
     cursor: pointer;
-    max-height:250px;
+    max-height:245px;
     margin-right: 10px;
 }
 .smallPoster{
@@ -29,20 +37,9 @@
 .smallPoster:hover{
     transform: scale(1.1);
 }
-.poster-container {
+.posterContainer {
     position: relative;
     display: inline-block; 
     margin: 5px; 
   }
   
-  .favorite {
-    position: absolute;
-    cursor: pointer;
-    top: 5px;
-    left: 5px;
-    padding: 5px;
-    z-index: 1;
-  }
-  .poster-container:hover .favorite {
-    transform: scale(1.1);
-}
