@@ -3,12 +3,12 @@ import Style from './Favourite.module.css'
 import { imageUrl } from '../../constants/constants'
 import { Container,Row } from 'react-bootstrap'
 import { FirebaseContext } from '../../Store/FirbaseContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faTrash} from '@fortawesome/free-solid-svg-icons'
+import { useFavoriteContext } from '../../Store/FavouriteContext'
+
 
 const Favourite = () => {
     const {firebase}=useContext(FirebaseContext)
-    const [favouriteData, setFavouriteData] = useState([]);
+    const {favouriteData,setFavouriteData}=useFavoriteContext()
   
     useEffect(() => {
       const fetchFavouriteData = async () => {
@@ -25,17 +25,7 @@ const Favourite = () => {
       };
   
       fetchFavouriteData();
-    }, [firebase]);
-    const deleteHandler= async (id) => {
-        try {
-          await firebase.firestore().collection('posterdata').doc(id).delete();
-          setFavouriteData((prevData) =>
-            prevData.filter((data) => data.id !== id)
-          );
-        } catch (error) {
-          console.error('Error deleting poster:', error);
-        }
-      };
+    }, []);
   return (
     
     <Container fluid className={Style.container}>
@@ -47,11 +37,11 @@ const Favourite = () => {
           <div className={Style.posters}>
          
               <div key={data.id}>
-              <div className={Style.delete}>
-            <FontAwesomeIcon  className='fa-lg fa-regular' onClick={()=>deleteHandler(data.id)} icon={faTrash} />   
+              
+          
                 </div>
                 <img src={`${imageUrl+data.backdropPath}`}  className={Style.poster}  alt={data.title}/> 
-              </div>
+              
             
             </div>  
         </div>

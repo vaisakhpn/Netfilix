@@ -7,6 +7,7 @@ import Createpage from './Pages/Create';
 import { useContext, useEffect } from 'react';
 import { AuthContext, FirebaseContext } from './Store/FirbaseContext';
 import FavouriteList from './Pages/FavouriteList';
+import { FavoriteProvider } from './Store/FavouriteContext';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   })
   return(
   <div className='App'>
+    <FavoriteProvider>
     <Router>
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -27,6 +29,7 @@ function App() {
         <Route path='/favourite' element={<FavouriteList/>}/>
       </Routes>
     </Router>
+    </FavoriteProvider>
   </div>
   )
   

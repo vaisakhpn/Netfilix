@@ -4,6 +4,7 @@ import { Container,Row,Col } from 'react-bootstrap'
 import {API_KEY,imageUrl} from '../../constants/constants'
 import axios from '../../axios'
 import './Banner.css'
+import { Link } from 'react-router-dom'
 
 
 const Banner = () => {
@@ -67,7 +68,7 @@ const Banner = () => {
             <h1 className='title'>{movie?movie.title:""}</h1>
             <div className='banner-buttons'>
                 <button className='button' onClick={()=>handleMovie(movie.id)} >play</button>
-                <button className='button'>My list</button>
+                <button className='button'><Link to='/favourite' className='link'>My list</Link></button>
             </div>
              
             {showVideo && urlid && (

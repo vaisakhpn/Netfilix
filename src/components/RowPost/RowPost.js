@@ -8,8 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHeart} from '@fortawesome/free-solid-svg-icons'
 import { FirebaseContext } from '../../Store/FirbaseContext'
 import { AuthContext } from '../../Store/FirbaseContext'
+import { useFavoriteContext } from '../../Store/FavouriteContext'
 
 const RowPost = (props) => {
+  const {favouriteData,setFavouriteData}=useFavoriteContext()
   const {firebase}=useContext(FirebaseContext)
   const {user}=useContext(AuthContext)
   const[movie,setMovie]=useState([])
@@ -60,6 +62,12 @@ const RowPost = (props) => {
     const selectedMovie = movie.find((obj) => obj.id === id);
 
     if (selectedMovie && user) {
+      const isAlreadyFavorited = favouriteData.some((data) => data.id === selectedMovie.id);
+    
+      if (isAlreadyFavorited) {
+        alert('Movie is already in your favorites.');
+        return;
+      }
       const firestore = firebase.firestore();
       firestore.collection('posterdata').add({
         id: selectedMovie.id,
@@ -69,6 +77,8 @@ const RowPost = (props) => {
         userId: user.uid,
         createdAt: new Date().toDateString(),
       }).then(() => {
+        setFavouriteData((prevFavouriteData) => [...prevFavouriteData, selectedMovie]);
+        alert('Added to favourite')
         console.log('Poster data added to Firestore.');
       }).catch((error) => {
         console.error('Error adding poster data:', error);
