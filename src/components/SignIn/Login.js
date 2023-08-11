@@ -5,7 +5,7 @@ import Style from './Login.module.css'
 import { Container,Row,Col,Card, Button } from 'react-bootstrap'
 import {API_KEY,imageUrl} from '../../constants/constants'
 import { Link, useNavigate } from 'react-router-dom'
-import { FirebaseContext } from '../../Store/FirbaseContext'
+import { AuthContext, FirebaseContext } from '../../Store/FirbaseContext'
 
 const Login = () => {
   const navigate=useNavigate()
@@ -15,6 +15,7 @@ const Login = () => {
   const [emailError,setEmailError]=useState('')
   const [passwordError, setPasswordError] = useState("");
   const{firebase}=useContext(FirebaseContext)
+  const {setUser}=useContext(AuthContext)
   useEffect(() => {
     axios.get(`trending/all/week?api_key=${API_KEY}&language=en-US`).then((response)=>{
       console.log(response.data.results[0])
@@ -23,6 +24,8 @@ const Login = () => {
       setMovie(randomMovie)
     });
   }, []);
+
+  
   const validateForm = () => {
     let isValid = true;
 
@@ -46,11 +49,20 @@ const Login = () => {
   const handleLogin=(e)=>{
     e.preventDefault()
     if(validateForm()){
-      firebase.auth().signInWithEmailAndPassword(email, password).then(()=>{
-        navigate('/')
-      }).catch((error) => {
-       alert(error.message)
-      });
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(() => {
+        return firebase.auth().signInWithEmailAndPassword(email, password);
+    })
+    .then((userCredential) => {
+        const authenticatedUser = userCredential.user;
+        setUser(authenticatedUser);
+        navigate('/');
+    })
+    .catch((error) => {
+        alert(error.message);
+    });
+
+    
     }
   }
   return (

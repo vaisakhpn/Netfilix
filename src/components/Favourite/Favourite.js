@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Style from './Favourite.module.css'
 import { imageUrl } from '../../constants/constants'
 import { Container,Row } from 'react-bootstrap'
@@ -11,10 +11,13 @@ const Favourite = () => {
     const {favouriteData,setFavouriteData}=useFavoriteContext()
   
     useEffect(() => {
+      
       const fetchFavouriteData = async () => {
         try {
+       
             if (firebase.auth().currentUser) {
                 const user = firebase.auth().currentUser;
+                
           const response = await firebase.firestore().collection('posterdata').where('userId','==',user.uid).get();
           const fetchedData = response.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
           setFavouriteData(fetchedData);
@@ -25,7 +28,9 @@ const Favourite = () => {
       };
   
       fetchFavouriteData();
-    }, []);
+    }, [firebase.auth().currentUser]);
+
+    console.log(favouriteData)
   return (
     
     <Container fluid className={Style.container}>

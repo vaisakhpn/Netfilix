@@ -17,6 +17,7 @@ const RowPost = (props) => {
   const[movie,setMovie]=useState([])
   const[urlid,setUrlId]=useState('')
   const [showVideo,setShowVideo]=useState(false)
+  
   useEffect(() => {
   axios.get(props.url).then((response)=>{
     console.log(response.data)
@@ -24,12 +25,26 @@ const RowPost = (props) => {
     setShowVideo(true)
   })
   }, []);
+  useEffect(() => {
+    if (user) {
+      const firestore = firebase.firestore();
+      firestore.collection('posterdata').where('userId', '==', user.uid).get()
+        .then((querySnapshot) => {
+          const fetchedData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          setFavouriteData(fetchedData);
+        })
+        .catch((error) => {
+          console.error('Error fetching favorite data:', error);
+        });
+    }
+  }, [user]);
+  
   useEffect(()=>{
     document.body.addEventListener('click',handleDoumentClick)
     return()=>{
       document.body.removeEventListener('click',handleDoumentClick)
     }
-  })
+  },[])
   const opts = {
     height: '390',
     width: '100%',
@@ -84,7 +99,6 @@ const RowPost = (props) => {
         console.error('Error adding poster data:', error);
       })
     }
-
   }
   return (
     <Container fluid>

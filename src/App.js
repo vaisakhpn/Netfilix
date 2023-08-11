@@ -17,7 +17,7 @@ function App() {
     firebase.auth().onAuthStateChanged((user)=>{
       setUser(user)
     })
-  })
+  }, [firebase])
   return(
   <div className='App'>
     <FavoriteProvider>
