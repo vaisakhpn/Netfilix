@@ -1,8 +1,8 @@
 .navbar{
-    
-    background-color: transparent;
-    background: none;
-    color: white;
+   background-color: black;
+   padding: 5PX;
+    position: fixed;
+    width: 100%;
     
 }
 .logo{

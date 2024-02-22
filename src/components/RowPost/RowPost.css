@@ -29,23 +29,7 @@
 .smallPoster:hover{
     transform: scale(1.1);
 }
-.poster-container {
-    position: relative;
-    display: inline-block; 
+.poster-container {     
     margin: 5px; 
   }
-  
-  .favorite {
-    position: absolute;
-    cursor: pointer;
-    top: 5px;
-    left: 5px;
-    padding: 5px;
-    z-index: 1;
-  }
-  .favorite:hover{
-    transform: scale(1.5);
-  }
-  .poster-container:hover .favorite {
-    transform: scale(1.2);
-}
+
